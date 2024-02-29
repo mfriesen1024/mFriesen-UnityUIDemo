@@ -67,9 +67,10 @@ public class UIManager : MonoBehaviour
         // The flaw with the above is that we cannot set a value other than 0 without another if/else.
         // Even then, we cannot set a nonzero value and add the same value.
 
-        // Here is another method. This is just wack because strings are weird.
+        // Create some sample inputs.
         string sampleSetInput = "set:14";
         string sampleAddInput = "add:14";
+        // Here is another method. This is just wack because strings are weird.
         int outputFromStringSet = ParseStringInput(sampleSetInput, out UpdateType outputSetType);
         int outputFromStringAdd = ParseStringInput(sampleAddInput, out UpdateType outputAddType);
 
