@@ -72,8 +72,8 @@ public class UIManager : MonoBehaviour
         int outputFromString = ParseStringInput(sampleInput);
 
         Debug.Log($"This method call works, got input value of {value}.");
-        Debug.Log($"");
-        Debug.Log($"");
+        Debug.Log($"Output from the int method is {outputFromInt}");
+        Debug.Log($"Output from the string method is {outputFromString}");
         throw new NotImplementedException();
     }
 
