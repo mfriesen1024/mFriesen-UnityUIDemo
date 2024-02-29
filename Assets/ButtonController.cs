@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
-    Button b;
+    [SerializeField]Button b;
     GameObject managerObj;
     
     [SerializeField] int value = 0;
