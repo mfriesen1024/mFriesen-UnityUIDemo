@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ExitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -24,7 +25,8 @@ public class ExitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void Update()
     {
-
+        // Nicer Quit
+        if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
     }//*/
 
     public void OnPointerEnter(PointerEventData data)
@@ -41,6 +43,6 @@ public class ExitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void OnClick()
     {
-        Application.Quit();
+        SceneManager.LoadScene(1);
     }
 }
