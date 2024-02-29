@@ -43,6 +43,9 @@ public class ExitButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void OnClick()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        if (canvas != null) { canvas.SetActive(false); }
+
         SceneManager.LoadScene(1);
     }
 }
