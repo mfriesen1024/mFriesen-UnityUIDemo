@@ -1,3 +1,7 @@
+using System;
+using TMPro;
+using UnityEngine;
+
 enum UpdateType { add, set }
 
 public class UIManager : MonoBehaviour
@@ -55,16 +59,16 @@ public class UIManager : MonoBehaviour
     public void SampleScoreUpdate(int value)
     {
         // This is a local score variable so that the score is never broken by accidental use.
-        int score;
+        int score = 0;
 
         // Determine if value is 0 so we can set score instead of add. This is wrong.
         if (value == 0) { score = 0; } else { score += value; }
 
         // The flaw with the above is that we cannot set a value other than 0 without another if/else.
         // Even then, we cannot set a nonzero value and add the same value.
-        string sampleInput = "set:14"
+        string sampleInput = "set:14";
 
-    Debug.Log($"This method call works, got {value}.");
+        Debug.Log($"This method call works, got {value}.");
         throw new NotImplementedException();
     }
 }
