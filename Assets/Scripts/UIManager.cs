@@ -59,10 +59,12 @@ public class UIManager : MonoBehaviour
     public void SampleScoreUpdate(int value)
     {
         // This is a local score variable so that the score is never broken by accidental use.
-        int outputFromInt = 10; UpdateType type;
+        int outputFromInt1 = 10; UpdateType type1;
+        int outputFromInt2 = 10; UpdateType type2; int sampleValue = 0;
 
         // Determine if value is 0 so we can set score instead of add. This is wrong.
-        if (value == 0) { outputFromInt = 0; type = UpdateType.set } else { outputFromInt += value; type = UpdateType.add; }
+        if (value == 0) { outputFromInt1 = 0; type1 = UpdateType.set; } else { outputFromInt1 += value; type1 = UpdateType.add; }
+        if (sampleValue == 0) { outputFromInt2 = 0; type2 = UpdateType.set; } else { outputFromInt2 += sampleValue; type2 = UpdateType.add; }
 
         // The flaw with the above is that we cannot set a value other than 0 without another if/else.
         // Even then, we cannot set a nonzero value and add the same value.
@@ -75,7 +77,8 @@ public class UIManager : MonoBehaviour
         int outputFromStringAdd = ParseStringInput(sampleAddInput, out UpdateType outputAddType);
 
         Debug.Log($"This method call works, got input value of {value}.");
-        Debug.Log($"Output from the int method is type {type} with value {outputFromInt}");
+        Debug.Log($"Output from the int method is type {type1} with value {outputFromInt1}");
+        Debug.Log($"Output from the int method is type {type2} with value {outputFromInt2}");
         Debug.Log($"Output from the string method with {outputSetType} mode is {outputFromStringSet}");
         Debug.Log($"Output from the string method with {outputAddType} mode is {outputFromStringAdd}");
         throw new NotImplementedException("This is a sample method, it doesn't do anything!");
