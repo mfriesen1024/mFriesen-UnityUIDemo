@@ -36,4 +36,9 @@ public class UIManager : MonoBehaviour
             default: throw new NotImplementedException($"{type} is not implemented in ScoreUpdate");
         }
     }
+
+    public void Method(int value){
+    Debug.Log($"This method call works, got {value}.");
+    throw new NotImplementedException();
+    }
 }
