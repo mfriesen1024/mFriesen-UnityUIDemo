@@ -59,16 +59,29 @@ public class UIManager : MonoBehaviour
     public void SampleScoreUpdate(int value)
     {
         // This is a local score variable so that the score is never broken by accidental use.
-        int score = 0;
+        int outputFromInt = 0;
 
         // Determine if value is 0 so we can set score instead of add. This is wrong.
-        if (value == 0) { score = 0; } else { score += value; }
+        if (value == 0) { outputFromInt = 0; } else { outputFromInt += value; }
 
         // The flaw with the above is that we cannot set a value other than 0 without another if/else.
         // Even then, we cannot set a nonzero value and add the same value.
-        string sampleInput = "set:14";
 
-        Debug.Log($"This method call works, got {value}.");
+        // Here is another method. This is just wack because strings are weird.
+        string sampleInput = "set:14";
+        int outputFromString = ParseStringInput(sampleInput);
+
+        Debug.Log($"This method call works, got input value of {value}.");
+        Debug.Log($"");
+        Debug.Log($"");
         throw new NotImplementedException();
+    }
+
+    // Here is another method. This is just wack because strings are weird.
+    int ParseStringInput(string input)
+    {
+        int location = 1 + input.IndexOf(':');
+        int output = int.Parse(input.Substring(location));
+        return output;
     }
 }
