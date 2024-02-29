@@ -37,8 +37,23 @@ public class UIManager : MonoBehaviour
         }
 
         Debug.Log($"Got input of type {type}, with value {value}");
+        FormatText();
     }
 
+    void FormatText(){
+    ClampScore();
+
+    string tempText = score.ToString();
+
+    string zero = "0";
+    while(zero.Length != (9 - tempText.Length)){zero += "0";}
+
+    scoreText = zero + tempText;
+    }
+
+    void ClampScore(){score = Mathf.Clamp(score, 0, 999999999);}
+
+// This is a dummy method for testing. In theory it would also work for score updates, but I'm using listeners.
     public void Method(int value){
     Debug.Log($"This method call works, got {value}.");
     throw new NotImplementedException();
