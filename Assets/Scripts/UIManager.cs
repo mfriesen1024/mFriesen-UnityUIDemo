@@ -53,7 +53,8 @@ public class UIManager : MonoBehaviour
 
     void ClampScore(){score = Mathf.Clamp(score, 0, 999999999);}
 
-// This is a dummy method for testing. In theory it would also work for score updates, but I'm using listeners.
+    // This is a method that would handle ints instead of an object array, if I used the builtin listener.
+    // However, I think that would just be really wacky and require weird workarounds, so forget that.
     public void Method(int value){
     Debug.Log($"This method call works, got {value}.");
     throw new NotImplementedException();
