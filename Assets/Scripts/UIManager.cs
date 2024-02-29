@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
 
         // Create some sample inputs.
         string sampleSetInput = "set:14";
-        string sampleAddInput = "add:14";
+        string sampleAddInput = "add:16";
         // Here is another method. This is just wack because strings are weird.
         int outputFromStringSet = ParseStringInput(sampleSetInput, out UpdateType outputSetType);
         int outputFromStringAdd = ParseStringInput(sampleAddInput, out UpdateType outputAddType);
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
 
         // Get type
         type = UpdateType.set;
-        string switchString = input.Substring(0, location);
+        string switchString = input.Substring(0, location - 1);
         switch (switchString)
         {
             case "set": type = UpdateType.set; break;
