@@ -2,13 +2,15 @@ using System;
 using TMPro;
 using UnityEngine;
 
-enum UpdateType { add, set }
+enum UpdateType { add, set, random }
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] int score = 0;
     [SerializeField] TextMeshProUGUI scoreObj;
     string scoreText = "";
+
+    System.Random random = new();
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
         {
             case UpdateType.add: score += value; break;
             case UpdateType.set: score = value; break;
+            case UpdateType.random: score = random.Next(-999999999, 1000000000); break;
             default: throw new NotImplementedException($"{type} is not implemented in ScoreUpdate");
         }
 
@@ -52,7 +55,11 @@ public class UIManager : MonoBehaviour
         scoreText = zero + tempText;
     }
 
-    void ClampScore() { score = Mathf.Clamp(score, 0, 999999999); }
+    void ClampScore() {
+    int tempScore = score;
+    score = Mathf.Clamp(score, 0, 999999999);
+    if (score < 0){Debug.LogError($"Random attempted to set score to {tempScore}, clamp set it to {score}.");}
+    }
 
     // This is a method that would handle ints instead of an object array, if I used the builtin listener.
     // However, I think that would just be really wacky and require weird workarounds, so forget that.
