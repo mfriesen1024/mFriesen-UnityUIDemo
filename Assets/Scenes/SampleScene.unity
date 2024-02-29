@@ -1516,6 +1516,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Score +15
       objectReference: {fileID: 0}
+    - target: {fileID: 7244672465623518095, guid: e17e48f3c60386147898fe20c69cf7d3, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7244672465623518095, guid: e17e48f3c60386147898fe20c69cf7d3, type: 3}
+      propertyPath: value
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7303468416366431240, guid: e17e48f3c60386147898fe20c69cf7d3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
