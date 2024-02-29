@@ -68,20 +68,34 @@ public class UIManager : MonoBehaviour
         // Even then, we cannot set a nonzero value and add the same value.
 
         // Here is another method. This is just wack because strings are weird.
-        string sampleInput = "set:14";
-        int outputFromString = ParseStringInput(sampleInput);
+        string sampleSetInput = "set:14";
+        string sampleAddInput = "add:14";
+        int outputFromStringSet = ParseStringInput(sampleSetInput, out UpdateType outputSetType);
+        int outputFromStringAdd = ParseStringInput(sampleAddInput, out UpdateType outputAddType);
 
         Debug.Log($"This method call works, got input value of {value}.");
         Debug.Log($"Output from the int method is {outputFromInt}");
-        Debug.Log($"Output from the string method is {outputFromString}");
-        throw new NotImplementedException();
+        Debug.Log($"Output from the string method with {outputSetType} mode is {outputFromStringSet}");
+        Debug.Log($"Output from the string method with {outputAddType} mode is {outputFromStringAdd}");
+        throw new NotImplementedException("This is a sample method, it doesn't do anything!");
     }
 
-    // Here is another method. This is just wack because strings are weird.
-    int ParseStringInput(string input)
+    // Here is another method. This is just wack because strings are weird. It also requires manual updating.
+    int ParseStringInput(string input, out UpdateType type)
     {
+        //
         int location = 1 + input.IndexOf(':');
         int output = int.Parse(input.Substring(location));
+
+        // Get type
+        type = UpdateType.set;
+        string switchString = input.Substring(0, location);
+        switch (switchString)
+        {
+            case "set": type = UpdateType.set; break;
+            case "add": type = UpdateType.add; break;
+            default: throw new NotImplementedException($"Type {switchString} is not implemented!");
+        }
         return output;
     }
 }
