@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreObj.text = scoreText;
+        if (scoreObj != null){scoreObj.text = scoreText;}
     }
 
     public void ScoreUpdate(object input)
