@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour
             case UpdateType.set: score = value; break;
             default: throw new NotImplementedException($"{type} is not implemented in ScoreUpdate");
         }
+
+        Debug.Log($"Got input of type {type}, with value {value}");
     }
 
     public void Method(int value){
