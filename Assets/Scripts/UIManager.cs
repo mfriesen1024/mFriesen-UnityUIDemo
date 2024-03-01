@@ -1,20 +1,28 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 enum UpdateType { add, set, random }
 
 public class UIManager : MonoBehaviour
 {
+    // Score things
     [SerializeField] int score = 0;
     [SerializeField] TextMeshProUGUI scoreObj;
     string scoreText = "";
+
+    // Modifiable Image things
+    [SerializeField] GameObject imageObj;
+    float r = 1, g = 1, b = 1, a = 1;
+    Color color;
 
     System.Random random = new();
 
     // Start is called before the first frame update
     void Start()
     {
+        color = new(r, g, b, a);
         FormatText();
     }
 
@@ -43,6 +51,31 @@ public class UIManager : MonoBehaviour
         FormatText();
     }
 
+    public void SliderUpdate(object[] input)
+    {
+        colorChannel channel = (colorChannel)input[1]; float value = (float)input[0];
+
+        Debug.Log($"{channel} {value}");
+
+        switch (channel)
+        {
+            case colorChannel.r: color.r = value; break;
+            case colorChannel.g: color.g = value; break;
+            case colorChannel.b: color.b = value; break;
+            case colorChannel.a: color.a = value; break;
+        }
+
+        Image image = imageObj.GetComponent<Image>();
+
+        Debug.Log(image.gameObject.name);
+
+        image.color = color;
+
+        Color c = image.color;
+
+        Debug.Log($"{c.r}, {c.g}, {c.b}, {c.a}");
+    }
+
     void FormatText()
     {
         ClampScore();
@@ -50,15 +83,17 @@ public class UIManager : MonoBehaviour
         string tempText = score.ToString();
 
         string zero = "0";
-        while (zero.Length != (9 - tempText.Length)) { zero += "0"; }
+        if (tempText.Length < 9) { while (zero.Length != (9 - tempText.Length)) { zero += "0"; } }
+        else { zero = string.Empty; }
 
         scoreText = zero + tempText;
     }
 
-    void ClampScore() {
-    int tempScore = score;
-    score = Mathf.Clamp(score, 0, 999999999);
-    if (score < 0){Debug.LogError($"Random attempted to set score to {tempScore}, clamp set it to {score}.");}
+    void ClampScore()
+    {
+        int tempScore = score;
+        score = Mathf.Clamp(score, 0, 999999999);
+        if (tempScore < 0) { Debug.LogError($"Attempted to set score to {tempScore}, clamp set it to {score}."); }
     }
 
     // This is a method that would handle ints instead of an object array, if I used the builtin listener.
