@@ -51,12 +51,18 @@ public class UIManager : MonoBehaviour
         FormatText();
     }
 
-    public void SliderUpdate(object[] input)
+    public void SliderUpdate(object[] input) 
+    // This is what I would have used.
+    // This is a bit more organized in my eyes because I don't need 4-5 methods, despite having to parse an object array.
     {
         colorChannel channel = (colorChannel)input[1]; float value = (float)input[0];
 
         Debug.Log($"{channel} {value}");
 
+        
+    }
+    private void SliderUpdate(colorChannel channel, float value)
+    {
         switch (channel)
         {
             case colorChannel.r: color.r = value; break;
