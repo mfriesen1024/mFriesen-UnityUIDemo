@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 enum UpdateType { add, set, random }
-enum colorChannel { r,g,b,a }
+enum colorChannel { r, g, b, a }
 
 public class UIManager : MonoBehaviour
 {
@@ -36,13 +36,20 @@ public class UIManager : MonoBehaviour
         if (scoreObj != null) { scoreObj.text = scoreText; }
     }
 
-    public void ScoreUpdate(object input) // This is how I would have done it.
+    public void ScoreUpdate(object input)
+    // This is how I would have done it using listeners.
+    // It works, but apparently the ask was to use the inspector as much as possible.
+    // (Frankly, I think this was poorly communicated, though I may have just been absent.)
     {
         // Convert to enum and int
         object[] newInput = (object[])input;
         UpdateType type = (UpdateType)newInput[0];
         int value = (int)newInput[1];
+        ScoreUpdate(type, value);
+    }
 
+    private void ScoreUpdate(UpdateType type, int value)
+    {
         switch (type)
         {
             case UpdateType.add: score += value; break;
@@ -55,9 +62,19 @@ public class UIManager : MonoBehaviour
         FormatText();
     }
 
+    public void ScoreUpdate(int value)
+    // This meets the keep it simple
+    {
+        // This has a noteworthy limitation, only 0 can reset score, and you cannot add 0 score (meaning no change).
+        UpdateType type = UpdateType.add;
+        if (value == 0) { type = UpdateType.set; }
+
+        ScoreUpdate(type, value);
+    }
+
     public void SetChannel(int channelID) // Call this from inspector to set a channel
     { channel = (colorChannel)channelID; }
-    public void SliderUpdate(object[] input) 
+    public void SliderUpdate(object[] input)
     // This is what I would have used.
     // This is a bit more organized in my eyes because I don't need 4-5 methods, despite having to parse an object array.
     {
@@ -99,9 +116,6 @@ public class UIManager : MonoBehaviour
 
         string tempText = score.ToString();
 
-        string zero = "0";
-        if (tempText.Length < 9) { while (zero.Length != (9 - tempText.Length)) { zero += "0"; } }
-        else { zero = string.Empty; }
         // I don't get why the example provided in class added leading 0s, but it did, so I did that myself. I mistakenly thought it was the ask.
         string zero = string.Empty; // use this as a very lazy way of undoing the leading 0 thing.
         //string zero = "0";
