@@ -63,13 +63,19 @@ public class UIManager : MonoBehaviour
     }
 
     public void ScoreUpdate(int value)
-    // This meets the keep it simple
+    // This meets the use inspector ask.
     {
         // This has a noteworthy limitation, only 0 can reset score, and you cannot add 0 score (meaning no change).
         UpdateType type = UpdateType.add;
         if (value == 0) { type = UpdateType.set; }
 
         ScoreUpdate(type, value);
+    }
+    public void SetRandomScore()
+        // This is to allow the inspector to call a method to random update. I'd rather use something a little more organized, but unity quirks I suppose.
+    {
+        // Update with 0 value because random will simply override it.
+        ScoreUpdate(UpdateType.random, 0);
     }
 
     public void SetChannel(int channelID) // Call this from inspector to set a channel
