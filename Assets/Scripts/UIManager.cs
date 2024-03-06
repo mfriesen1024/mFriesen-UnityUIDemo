@@ -175,10 +175,14 @@ public class UIManager : MonoBehaviour
         eventTimer -= Time.deltaTime;
         eventTimer = Mathf.Clamp(eventTimer, 0, maxTime);
 
-        float localTime = eventTimer;
+        
         int minutes = 0, seconds = 0;
-        //while (localTime > 60) { minutes++; eventTimer -= 60; }
-        //seconds = (int)localTime;
+        // for some reason, a while loop broke unity. I'm too lazy to fix it.
+        for (int i = (int)eventTimer; i > 60; i -= 60)
+        {
+            minutes++;
+            seconds = i - 60;
+        }
 
         string printable = $"{eventName}: {minutes}:{seconds}";
 
