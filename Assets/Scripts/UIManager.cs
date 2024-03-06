@@ -102,6 +102,11 @@ public class UIManager : MonoBehaviour
         string zero = "0";
         if (tempText.Length < 9) { while (zero.Length != (9 - tempText.Length)) { zero += "0"; } }
         else { zero = string.Empty; }
+        // I don't get why the example provided in class added leading 0s, but it did, so I did that myself. I mistakenly thought it was the ask.
+        string zero = string.Empty; // use this as a very lazy way of undoing the leading 0 thing.
+        //string zero = "0";
+        //if (tempText.Length < 9) { while (zero.Length != (9 - tempText.Length)) { zero += "0"; } }
+        //else { zero = string.Empty; }
 
         scoreText = zero + tempText;
     }
