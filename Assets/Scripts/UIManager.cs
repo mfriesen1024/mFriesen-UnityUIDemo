@@ -8,18 +8,24 @@ enum colorChannel { r, g, b, a }
 
 public class UIManager : MonoBehaviour
 {
-    // Score things
+    [Header("Score things")]
     [SerializeField] int score = 0;
     [SerializeField] TextMeshProUGUI scoreObj;
     string scoreText = "";
 
-    // Modifiable Image things
+    [Header("Image things")]
     [SerializeField] GameObject rockImageObj;
     float r = 1, g = 1, b = 1, a = 1;
     Color color;
     bool isHidden;
 
-    // Slider tomfoolery
+    [Header("HP things")]
+    [SerializeField] Slider hpBar;
+    [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] int maxHP;
+    int hp;
+
+    // Image Slider tomfoolery
     colorChannel channel;
 
     System.Random random = new();
