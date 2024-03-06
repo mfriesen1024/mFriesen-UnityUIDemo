@@ -23,11 +23,17 @@ public class UIManager : MonoBehaviour
     [Header("HP things")]
     [SerializeField] Slider hpBar;
     [SerializeField] TextMeshProUGUI hpText;
-    [SerializeField] int maxHP;
+    [SerializeField] Image hpFill;
+    [SerializeField] int maxHP; int hp;
     [SerializeField] Color healthyColour;
     [SerializeField] Color criticalColour;
-    int hp;
-    UpdateType hpUpdateType;
+    UpdateType hpUpdateType = UpdateType.set;
+
+    [Header("Event things")]
+    [SerializeField] string eventName = "Untitled Event";
+    [SerializeField] Slider eventBar;
+    [SerializeField] TextMeshProUGUI eventText;
+    [SerializeField] float maxTime = 5; float eventTimer;
 
     // Image Slider tomfoolery
     colorChannel channel;
@@ -39,12 +45,19 @@ public class UIManager : MonoBehaviour
     {
         color = new(r, g, b, a);
         FormatText();
+
+        // Force an update to max hp on start to prevent user from seeing sloppy text.
+        UpdateHP(maxHP);
+
+        eventTimer = maxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (scoreObj != null) { scoreObj.text = scoreText; }
+
+        UpdateEvent();
     }
 
     public void ScoreUpdate(object input)
@@ -148,11 +161,32 @@ public class UIManager : MonoBehaviour
         string text = $"{hp}/{maxHP} HP";
         float localHP = hp, localMaxHP = maxHP;
         hpText.text = text;
-        hpBar.value = localHP / localMaxHP;
+        float fillValue = localHP / localMaxHP;
+        hpBar.value = fillValue;
 
-        Debug.Log(hpBar.value);
+        hpFill.color = Color.Lerp(criticalColour, healthyColour, fillValue);
+        
 
         if (hp == 0) { OnDeath(); }
+    }
+    public void ResetEventTimer() { eventTimer = maxTime; }
+    private void UpdateEvent()
+    {
+        eventTimer -= Time.deltaTime;
+        eventTimer = Mathf.Clamp(eventTimer, 0, maxTime);
+
+        float localTime = eventTimer;
+        int minutes = 0, seconds = 0;
+        //while (localTime > 60) { minutes++; eventTimer -= 60; }
+        //seconds = (int)localTime;
+
+        string printable = $"{eventName}: {minutes}:{seconds}";
+
+        eventText.text = printable;
+
+        float fillValue = eventTimer / maxTime;
+
+        eventBar.value = fillValue;
     }
 
     void FormatText()
