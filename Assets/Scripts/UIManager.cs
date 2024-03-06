@@ -192,6 +192,7 @@ public class UIManager : MonoBehaviour
 
         eventBar.value = fillValue;
     }
+    public void SetEventName(string name) { eventName = name; }
 
     void FormatText()
     {
