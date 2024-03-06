@@ -630,7 +630,8 @@ PrefabInstance:
       propertyPath: m_text
       value: Rock Red
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4897073888696017809, guid: 2ba52bf80e84ea64e804c8ad94689e5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1044,7 +1045,8 @@ PrefabInstance:
       propertyPath: m_text
       value: Rock Green
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4897073888696017809, guid: 2ba52bf80e84ea64e804c8ad94689e5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1202,7 +1204,8 @@ PrefabInstance:
       propertyPath: m_text
       value: Rock Blue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4897073888696017809, guid: 2ba52bf80e84ea64e804c8ad94689e5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3665,7 +3668,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4897073888696017809, guid: 2ba52bf80e84ea64e804c8ad94689e5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
