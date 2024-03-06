@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider hpBar;
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] int maxHP;
+    [SerializeField] Color healthyColour;
+    [SerializeField] Color criticalColour;
     int hp;
     UpdateType hpUpdateType;
 
@@ -139,6 +142,17 @@ public class UIManager : MonoBehaviour
             case UpdateType.set: hp = value; break;
             default: throw new InvalidOperationException($"Update type {hpUpdateType} is either not valid or not implemented for UpdateHP.");
         }
+
+        hp = Mathf.Clamp(hp, 0, maxHP);
+
+        string text = $"{hp}/{maxHP} HP";
+        float localHP = hp, localMaxHP = maxHP;
+        hpText.text = text;
+        hpBar.value = localHP / localMaxHP;
+
+        Debug.Log(hpBar.value);
+
+        if (hp == 0) { OnDeath(); }
     }
 
     void FormatText()
@@ -161,5 +175,10 @@ public class UIManager : MonoBehaviour
         int tempScore = score;
         score = Mathf.Clamp(score, 0, 999999999);
         if (tempScore < 0) { Debug.Log($"Attempted to set score to {tempScore}, clamp set it to {score}."); }
+    }
+
+    void OnDeath()
+    {
+        Debug.Log("Death is not implemented, but this isn't an error either.");
     }
 }
