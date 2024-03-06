@@ -135,6 +135,6 @@ public class UIManager : MonoBehaviour
     {
         int tempScore = score;
         score = Mathf.Clamp(score, 0, 999999999);
-        if (tempScore < 0) { Debug.LogError($"Attempted to set score to {tempScore}, clamp set it to {score}."); }
+        if (tempScore < 0) { Debug.Log($"Attempted to set score to {tempScore}, clamp set it to {score}."); }
     }
 }
