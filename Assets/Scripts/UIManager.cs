@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 enum UpdateType { add, set, random }
@@ -55,6 +56,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+
         if (scoreObj != null) { scoreObj.text = scoreText; }
 
         UpdateEvent();
@@ -193,6 +196,8 @@ public class UIManager : MonoBehaviour
         eventBar.value = fillValue;
     }
     public void SetEventName(string name) { eventName = name; }
+
+    public void ExitGame() { SceneManager.LoadScene(1); }
 
     void FormatText()
     {
