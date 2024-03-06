@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] int maxHP;
     int hp;
+    UpdateType hpUpdateType;
 
     // Image Slider tomfoolery
     colorChannel channel;
@@ -79,7 +80,7 @@ public class UIManager : MonoBehaviour
         ScoreUpdate(type, value);
     }
     public void SetRandomScore()
-        // This is to allow the inspector to call a method to random update. I'd rather use something a little more organized, but unity quirks I suppose.
+    // This is to allow the inspector to call a method to random update. I'd rather use something a little more organized, but unity quirks I suppose.
     {
         // Update with 0 value because random will simply override it.
         ScoreUpdate(UpdateType.random, 0);
@@ -127,6 +128,17 @@ public class UIManager : MonoBehaviour
         Color c = image.color;
 
         Debug.Log($"{c.r}, {c.g}, {c.b}, {c.a}");
+    }
+
+    public void SetHPUpdateType(int value) { hpUpdateType = (UpdateType)value; }
+    public void UpdateHP(int value)
+    {
+        switch (hpUpdateType)
+        {
+            case UpdateType.add: hp += value; break;
+            case UpdateType.set: hp = value; break;
+            default: throw new InvalidOperationException($"Update type {hpUpdateType} is either not valid or not implemented for UpdateHP.");
+        }
     }
 
     void FormatText()
