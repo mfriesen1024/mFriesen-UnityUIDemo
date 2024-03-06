@@ -14,9 +14,10 @@ public class UIManager : MonoBehaviour
     string scoreText = "";
 
     // Modifiable Image things
-    [SerializeField] GameObject imageObj;
+    [SerializeField] GameObject rockImageObj;
     float r = 1, g = 1, b = 1, a = 1;
     Color color;
+    bool isHidden;
 
     // Slider tomfoolery
     colorChannel channel;
@@ -78,6 +79,12 @@ public class UIManager : MonoBehaviour
         ScoreUpdate(UpdateType.random, 0);
     }
 
+    public void ShowHideRock()
+    {
+        if (isHidden) { isHidden = false; } else { isHidden = true; }
+        rockImageObj.SetActive(!isHidden);
+    }
+
     public void SetChannel(int channelID) // Call this from inspector to set a channel
     { channel = (colorChannel)channelID; }
     public void SliderUpdate(object[] input)
@@ -105,7 +112,7 @@ public class UIManager : MonoBehaviour
             case colorChannel.a: color.a = value; break;
         }
 
-        Image image = imageObj.GetComponent<Image>();
+        Image image = rockImageObj.GetComponent<Image>();
 
         Debug.Log(image.gameObject.name);
 
