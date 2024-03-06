@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour
     float r = 1, g = 1, b = 1, a = 1;
     Color color;
 
+    // Slider tomfoolery
+    colorChannel channel;
+
     System.Random random = new();
 
     // Start is called before the first frame update
@@ -51,6 +54,8 @@ public class UIManager : MonoBehaviour
         FormatText();
     }
 
+    public void SetChannel(int channelID) // Call this from inspector to set a channel
+    { channel = (colorChannel)channelID; }
     public void SliderUpdate(object[] input) 
     // This is what I would have used.
     // This is a bit more organized in my eyes because I don't need 4-5 methods, despite having to parse an object array.
@@ -59,7 +64,12 @@ public class UIManager : MonoBehaviour
 
         Debug.Log($"{channel} {value}");
 
-        
+        SliderUpdate(channel, value);
+    }
+    public void SliderUpdate(float value)
+    // This is the overload we call from inspector.
+    {
+        SliderUpdate(channel, value);
     }
     private void SliderUpdate(colorChannel channel, float value)
     {
